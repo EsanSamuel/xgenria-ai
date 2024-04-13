@@ -249,6 +249,26 @@ class PromptController {
       );
     }
   }
+
+  static async deleteRecent(request: Request, { params }: Params) {
+    try {
+      const deleterecent = await prisma.recent.delete({
+        where: {
+          id: params.id,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Recent deletes!", deleterecent)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
 }
 
 export default PromptController;

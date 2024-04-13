@@ -5,7 +5,7 @@ import React from "react";
 export type PromptType = {
   input: string;
   setInput: any;
-  sendPrompt: () => void;
+  sendPrompt: (prompt?: string) => void;
   promptData: any;
   isLoading: boolean;
 };

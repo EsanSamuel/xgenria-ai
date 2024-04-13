@@ -42,7 +42,7 @@ const Card = ({ document }: documentProps) => {
   };
 
   const handleDelete = async () => {
-    const response = await axios.delete(`/api/prompt/${document.id}`);
+    await axios.delete(`/api/prompt/${document.id}`);
     toast.success("Document deleted successfully!");
   };
 

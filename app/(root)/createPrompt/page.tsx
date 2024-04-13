@@ -4,17 +4,18 @@ import useModal from "@/hooks/zustand/useModal";
 import React, { CSSProperties } from "react";
 import { IoSendOutline } from "react-icons/io5";
 import { TiMicrophoneOutline } from "react-icons/ti";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { IoClose } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import FadeLoader from "react-spinners/FadeLoader";
-import { Input} from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 
 const page = () => {
   const modal = useModal();
+  const searchParams = useSearchParams();
+  const recentValue = searchParams.get("recentValue");
   const { data: session } = useSession();
   const router = useRouter();
   const [title, setTitle] = React.useState<string>("");
@@ -37,6 +38,7 @@ const page = () => {
       recent: input,
     });
     console.log(response.data);
+    //setInput("");
   }
   const openModal = () => {
     modal.onOpen();
@@ -44,6 +46,13 @@ const page = () => {
   const closeModal = () => {
     modal.onClose();
   };
+
+  React.useEffect(() => {
+    if (recentValue && recentValue.length > 0) {
+      setInput(recentValue);
+      sendPrompt();
+    }
+  }, [recentValue]);
 
   const handleChange =
     (name: string) =>
@@ -79,7 +88,7 @@ const page = () => {
     }
   }
   return (
-    <div className="flex flex-col justify-center items-center overflow-auto ">
+    <div className="flex flex-col justify-center items-center overflow-auto w-full">
       <div className=" w-full flex flex-col justify-between h-screen overflow-hidden relative text-white">
         <div className="p-5 w-full overflow-auto">
           <div className="flex gap-4 justify-between  w-full">
@@ -89,7 +98,7 @@ const page = () => {
             <div>
               {promptData && (
                 <button
-                  className="px-4 py-1 bg-blue-1 rounded-full"
+                  className="px-4 py-1 bg-blue-1 rounded-full text-[14px]"
                   onClick={openModal}
                 >
                   Save as Document
@@ -98,12 +107,16 @@ const page = () => {
             </div>
           </div>
           {isLoading ? (
-            <SkeletonTheme baseColor="#202020" highlightColor="#444">
-              <p>
-                loading...
-                <Skeleton count={3} />
-              </p>
-            </SkeletonTheme>
+            <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20%] w-full">
+              <FadeLoader
+                color="#0C78F9"
+                loading={isLoading}
+                cssOverride={override}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              <h1 className="text-[14px]">Generating Prompt...</h1>
+            </div>
           ) : (
             <div>
               <h1
@@ -120,13 +133,14 @@ const page = () => {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter Prompt"
               className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
+              value={input}
             />
-            <button className="text-white bg-blue-1 px-3 py-1 rounded">
+            <button className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50">
               <TiMicrophoneOutline size={20} />
             </button>
             <button
-              onClick={sendPrompt}
-              className="text-white bg-blue-1 px-3 py-1 rounded"
+              onClick={handleSubmit}
+              className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
             >
               <IoSendOutline size={20} />
             </button>
@@ -142,12 +156,11 @@ const page = () => {
               <Input
                 onChange={handleChange("title")}
                 placeholder="Enter Title"
-                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-1"
-                value={input}
+                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
               />
               <select
                 onChange={handleChange("tag")}
-                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-1"
+                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-2 bg-dark-1 text-[13px]"
               >
                 <option>Select Tag</option>
                 <option>Science</option>
@@ -155,7 +168,7 @@ const page = () => {
                 <option>Programming</option>
               </select>
               <button
-                className="px-4 py-2 bg-blue-1 rounded-full w-full"
+                className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
                 onClick={createDocument}
               >
                 Save as Document
