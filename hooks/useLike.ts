@@ -10,7 +10,7 @@ const useLike = (promptId: string) => {
     `/api/promptId/${promptId}`
   );
   const { mutate: mutateFetchedPrompts } = usePrompt(
-    `/api/post/${session?.user?.id}`
+    `/api/prompt/${session?.user?.id}`
   );
 
   const hasLiked = React.useMemo(() => {

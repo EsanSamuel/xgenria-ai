@@ -33,7 +33,6 @@ export const PromptProvider = ({ children }: { children: React.ReactNode }) => {
     }
     let newResponse = promptArray!.split("*").join("</br>");
     setPromptData(newResponse as string);
-    setInput("");
   };
   return (
     <PromptContext.Provider

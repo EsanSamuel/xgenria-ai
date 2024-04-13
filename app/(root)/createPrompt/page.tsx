@@ -1,7 +1,7 @@
 "use client";
 import { PromptContext, PromptType } from "@/context/PromptProvider";
 import useModal from "@/hooks/zustand/useModal";
-import React from "react";
+import React, { CSSProperties } from "react";
 import { IoSendOutline } from "react-icons/io5";
 import { TiMicrophoneOutline } from "react-icons/ti";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import FadeLoader from "react-spinners/FadeLoader";
+import { Input} from "@/components/ui/input";
 
 const page = () => {
   const modal = useModal();
@@ -17,12 +19,24 @@ const page = () => {
   const router = useRouter();
   const [title, setTitle] = React.useState<string>("");
   const [tag, setTag] = React.useState<string>("");
+  const [loading, setLoading] = React.useState<boolean>(false);
   const { input, sendPrompt, setInput, promptData, isLoading } =
     React.useContext(PromptContext) as PromptType;
 
-  function handleSubmit(e: any) {
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "#0C78F9",
+  };
+
+  async function handleSubmit(e: any) {
     e.preventDefault();
     sendPrompt();
+    const response = await axios.post("/api/recent", {
+      user_Id: session?.user?.id,
+      recent: input,
+    });
+    console.log(response.data);
   }
   const openModal = () => {
     modal.onOpen();
@@ -48,14 +62,17 @@ const page = () => {
 
   async function createDocument() {
     try {
+      setLoading(true);
       const response = await axios.post("/api/prompt", {
         user_Id: session?.user?.id,
         title,
         tag,
         promptData,
       });
+      modal.onClose();
       console.log(response.data);
-      router.push("/");
+      setLoading(false);
+      router.push("/documents");
       toast.success("Document created!");
     } catch (error) {
       console.log(error);
@@ -99,7 +116,7 @@ const page = () => {
             onSubmit={handleSubmit}
             className="flex gap-2 fixed bottom-0 w-full md:max-w-screen-lg mx-auto  md:p-3"
           >
-            <input
+            <Input
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter Prompt"
               className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
@@ -122,10 +139,11 @@ const page = () => {
             <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
               <IoClose size={20} className="text-right" onClick={closeModal} />
               <h3>Are you sure you want to save prompt as a document?</h3>
-              <input
+              <Input
                 onChange={handleChange("title")}
                 placeholder="Enter Title"
                 className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-1"
+                value={input}
               />
               <select
                 onChange={handleChange("tag")}
@@ -142,6 +160,25 @@ const page = () => {
               >
                 Save as Document
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
+          <div className="relative w-full lg:w-2/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+            <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1 text-center text-white shadow-lg outline-none focus:outline-none">
+              <FadeLoader
+                color="#0C78F9"
+                loading={loading}
+                cssOverride={override}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              <p className="text-[14px] text-white pt-5">
+                Creating document...
+              </p>
             </div>
           </div>
         </div>

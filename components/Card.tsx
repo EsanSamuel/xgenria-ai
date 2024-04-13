@@ -7,6 +7,8 @@ import axios from "axios";
 import useLike from "@/hooks/useLike";
 import { FcLike } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { MdDeleteOutline } from "react-icons/md";
+import toast from "react-hot-toast";
 
 type documentProps = {
   document: {
@@ -39,6 +41,11 @@ const Card = ({ document }: documentProps) => {
     router.push(`/prompt?id=${document.id}`);
   };
 
+  const handleDelete = async () => {
+    const response = await axios.delete(`/api/prompt/${document.id}`);
+    toast.success("Document deleted successfully!");
+  };
+
   return (
     <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 ">
       <div className="flex flex-col gap-5">
@@ -53,9 +60,12 @@ const Card = ({ document }: documentProps) => {
         <p className="text-base font-normal">{document.createdAt}</p>
         <div className="left-2 flex justify-between items-center">
           {LikeIcon()}
-          <button className="bg-blue-1 px-4 py-2 text-white rounded">
-            {document.tag}
-          </button>
+          <div className="flex gap-3 items-center">
+            <button className="bg-blue-1 px-4 py-2 text-white rounded text-[13px]">
+              {document.tag}
+            </button>
+            <MdDeleteOutline size={20} onClick={handleDelete} />
+          </div>
         </div>
       </div>
     </div>

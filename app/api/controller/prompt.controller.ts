@@ -68,6 +68,26 @@ class PromptController {
     }
   }
 
+  static async deleteDocument(request: Request, { params }: Params) {
+    try {
+      const deletePrompt = await prisma.prompt.delete({
+        where: {
+          id: params.id,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Document deletes!", deletePrompt)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
   static async getPromptId(request: Request, { params }: Params) {
     try {
       const getprompt = await prisma.prompt.findUnique({
@@ -171,6 +191,54 @@ class PromptController {
       });
       return new Response(
         JSON.stringify(new ApiSuccess(200, "Document unLiked!", unLike)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
+  static async addRecent(request: Request, { params }: Params) {
+    try {
+      const { user_Id, recent } = await request.json();
+      const addrecent = await prisma.recent.create({
+        data: {
+          userId: user_Id,
+          recent,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(201, "Recent prompt added!", addrecent)),
+        { status: 201 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+  static async getRecents(request: Request, { params }: Params) {
+    try {
+      const userId = params.id;
+      const getrecents = await prisma.recent.findMany({
+        where: {
+          userId,
+        },
+        include: {
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Recents gotten!", getrecents)),
         { status: 200 }
       );
     } catch (error) {
