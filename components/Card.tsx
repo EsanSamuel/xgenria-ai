@@ -9,6 +9,7 @@ import { FcLike } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { MdDeleteOutline } from "react-icons/md";
 import toast from "react-hot-toast";
+import { formatDistanceToNowStrict } from "date-fns";
 
 type documentProps = {
   document: {
@@ -46,6 +47,14 @@ const Card = ({ document }: documentProps) => {
     toast.success("Document deleted successfully!");
   };
 
+  const createdAt = React.useMemo(() => {
+    if (!document?.createdAt) {
+      return null;
+    }
+    const date = document?.createdAt;
+    return formatDistanceToNowStrict(new Date(date));
+  }, [document]);
+
   return (
     <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 ">
       <div className="flex flex-col gap-5">
@@ -57,7 +66,7 @@ const Card = ({ document }: documentProps) => {
         <h1 className="text-[20px] text-start" onClick={handleClick}>
           {document.title}
         </h1>
-        <p className="text-base font-normal">{document.createdAt}</p>
+        <p className="font-normal  text-[15px]">created {createdAt} ago</p>
         <div className="left-2 flex justify-between items-center">
           {LikeIcon()}
           <div className="flex gap-3 items-center">

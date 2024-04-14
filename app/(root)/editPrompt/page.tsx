@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import FadeLoader from "react-spinners/FadeLoader";
 import React, { CSSProperties } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Edit = () => {
   const router = useRouter();
@@ -96,7 +97,7 @@ const Edit = () => {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
-              <p className="text-[14px] text-white pt-5">Edit document...</p>
+              <p className="text-[14px] text-white pt-5">Editing document...</p>
             </div>
           </div>
         </div>

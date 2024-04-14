@@ -22,7 +22,8 @@ const Sidebar = () => {
   if (
     pathname !== "/" &&
     pathname !== "/prompt" &&
-    pathname !== "/editPrompt"
+    pathname !== "/editPrompt" &&
+    pathname !== "/settings"
   ) {
     return (
       <div className="sticky top-0 p-5 flex-col flex gap-8 h-screen  border-neutral-700 min-w-[250px] text-[#fff] bg-dark-1 max-sm:hidden ">
@@ -95,7 +96,9 @@ const Sidebar = () => {
               {user?.username}
             </li>
           ) : (
-            <AuthProvider />
+            <li className="flex gap-2  rounded py-3 px-2 cursor-pointer items-center fixed bottom-5">
+              <AuthProvider />
+            </li>
           )}
         </ul>
       </div>

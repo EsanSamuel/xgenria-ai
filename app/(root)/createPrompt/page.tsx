@@ -127,7 +127,7 @@ const page = () => {
           )}
           <form
             onSubmit={handleSubmit}
-            className="flex gap-2 fixed bottom-0 w-full md:max-w-screen-lg mx-auto  md:p-3"
+            className="flex gap-2 fixed bottom-0 w-full md:max-w-screen-lg mx-auto w-full md:p-3"
           >
             <Input
               onChange={(e) => setInput(e.target.value)}
