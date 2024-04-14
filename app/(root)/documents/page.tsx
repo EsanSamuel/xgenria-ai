@@ -9,6 +9,7 @@ import useModal from "@/hooks/zustand/useModal";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { IoClose, IoFilterOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 type documentProps = {
   id: string;
@@ -27,6 +28,7 @@ type documentProps = {
 const page = () => {
   const { data: session } = useSession();
   const modal = useModal();
+  const router = useRouter();
   const [search, setSearch] = React.useState<string>("");
   const { data: document = [] } = usePrompt(`/api/prompt/${session?.user?.id}`);
   console.log(document);
@@ -35,7 +37,6 @@ const page = () => {
     "filterTags",
     ""
   );
-
   const filterTags = (tag: string) =>
     filterByTags
       ? document.filter((item: documentProps) => item.tag === tag)
@@ -46,7 +47,6 @@ const page = () => {
     if (date < 18) return "Good eafternoon";
     return "Good evening";
   };
-
   const handleFilter = (tag: string) => {
     switch (tag) {
       case "Science":
