@@ -8,6 +8,17 @@
   font-family: "Poppins", sans-serif;
 }
 
+*::-webkit-scrollbar {
+  background: transparent;
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #aaaaaa;
+  width: 5px;
+  border-radius: 10px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

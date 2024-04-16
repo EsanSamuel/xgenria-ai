@@ -2,6 +2,7 @@
 import usePrompt from "@/hooks/usePrompts";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 const page = () => {
   const router = useRouter();
@@ -15,7 +16,10 @@ const page = () => {
   return (
     <div className="text-start sm:px-[20%] sm:py-20 p-5 text-white w-full">
       <div className="flex justify-between">
-        <h1 className="text-[25px] font-bold">{documentItem?.title}</h1>
+        <div className="flex gap-4 items-center">
+          <h1 className="text-[25px] font-bold">{documentItem?.title}</h1>
+          <Badge>{documentItem?.tag}</Badge>
+        </div>
         <div>
           <button
             className="rounded-full px-5 py-1 text-white bg-blue-1"

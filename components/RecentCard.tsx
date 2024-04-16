@@ -14,6 +14,7 @@ type recentProps = {
       email: string;
     };
     createdAt: string;
+    prompt: string;
   };
 };
 
@@ -23,7 +24,9 @@ const RecentCard = ({ recentitem }: recentProps) => {
     await axios.delete(`/api/recent/${recentitem.id}`);
   }
   async function handleClick() {
-    router.push(`/createPrompt?recentValue=${recentitem.recent}`);
+    router.push(
+      `/createPrompt?recentValue=${recentitem.recent}&prompt=${recentitem.prompt}`
+    );
   }
   return (
     <div className="bg-dark-1 w-full p-3 flex justify-between cursor-pointer rounded">

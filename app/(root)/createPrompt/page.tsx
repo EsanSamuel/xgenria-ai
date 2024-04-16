@@ -11,18 +11,26 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import FadeLoader from "react-spinners/FadeLoader";
 import { Input } from "@/components/ui/input";
+import useSpeechRecognition from "@/hooks/useSpeechRecognition";
+import { FaMicrophoneSlash } from "react-icons/fa";
 
 const page = () => {
   const modal = useModal();
   const searchParams = useSearchParams();
   const recentValue = searchParams.get("recentValue");
+  const recentPrompt = searchParams.get("prompt");
   const { data: session } = useSession();
   const router = useRouter();
   const [title, setTitle] = React.useState<string>("");
   const [tag, setTag] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [recentPromptValue, setRecentPromptValue] = React.useState<string>(
+    recentPrompt as string
+  );
   const { input, sendPrompt, setInput, promptData, isLoading } =
     React.useContext(PromptContext) as PromptType;
+  const { isListening, inputValue, startRecording, inputRef } =
+    useSpeechRecognition();
 
   const override: CSSProperties = {
     display: "block",
@@ -32,13 +40,19 @@ const page = () => {
 
   async function handleSubmit(e: any) {
     e.preventDefault();
+    setRecentPromptValue("");
     sendPrompt();
-    const response = await axios.post("/api/recent", {
-      user_Id: session?.user?.id,
-      recent: input,
-    });
-    console.log(response.data);
-    //setInput("");
+    try {
+      const response = await axios.post("/api/recent", {
+        user_Id: session?.user?.id,
+        recent: input,
+        prompt: promptData,
+      });
+      console.log(response.data);
+      //setInput("");
+    } catch (error) {
+      console.log(error);
+    }
   }
   const openModal = () => {
     modal.onOpen();
@@ -50,7 +64,6 @@ const page = () => {
   React.useEffect(() => {
     if (recentValue && recentValue.length > 0) {
       setInput(recentValue);
-      sendPrompt();
     }
   }, [recentValue]);
 
@@ -68,6 +81,21 @@ const page = () => {
           break;
       }
     };
+
+  React.useEffect(() => {
+    if (inputValue) {
+      setInput(inputValue);
+    }
+  }, [inputValue]);
+
+  async function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (inputValue) {
+      setInput(inputValue);
+      setInput(e.target.value);
+    } else {
+      setInput(e.target.value);
+    }
+  }
 
   async function createDocument() {
     try {
@@ -119,10 +147,17 @@ const page = () => {
             </div>
           ) : (
             <div>
-              <h1
-                className="mt-10 text-left max-w-[1200px] whitespace-normal"
-                dangerouslySetInnerHTML={{ __html: promptData }}
-              />
+              {recentPromptValue?.length > 0 ? (
+                <h1
+                  className="mt-10 text-left max-w-[1200px] whitespace-normal"
+                  dangerouslySetInnerHTML={{ __html: recentPromptValue }}
+                />
+              ) : (
+                <h1
+                  className="mt-10 text-left max-w-[1200px] whitespace-normal"
+                  dangerouslySetInnerHTML={{ __html: promptData }}
+                />
+              )}
             </div>
           )}
           <form
@@ -130,14 +165,27 @@ const page = () => {
             className="flex gap-2 fixed bottom-0 w-full md:max-w-screen-lg mx-auto w-full md:p-3"
           >
             <Input
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleInputChange}
               placeholder="Enter Prompt"
               className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
               value={input}
+              ref={inputRef}
             />
-            <button className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50">
-              <TiMicrophoneOutline size={20} />
-            </button>
+            {isListening ? (
+              <button
+                className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                onClick={startRecording}
+              >
+                <FaMicrophoneSlash size={20} />
+              </button>
+            ) : (
+              <button
+                className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                onClick={startRecording}
+              >
+                <TiMicrophoneOutline size={20} />
+              </button>
+            )}
             <button
               onClick={handleSubmit}
               className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"

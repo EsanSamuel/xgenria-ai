@@ -18,6 +18,7 @@ type documentProps = {
     tag: string;
     promptData: string;
     createdAt: string;
+    starId: string[];
     user: {
       id: string;
       username: string;
@@ -55,12 +56,24 @@ const Card = ({ document }: documentProps) => {
     return formatDistanceToNowStrict(new Date(date));
   }, [document]);
 
+  async function handlePinn() {
+    try {
+      const response = await axios.post(`/api/pinned/${document.id}`, {
+        user_Id: session?.user?.id,
+      });
+      toast.success("Document pinned!");
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 ">
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <HiOutlineDocumentDuplicate size={25} />
-          <VscPinned size={25} />
+          <VscPinned size={25} onClick={handlePinn} />
         </div>
 
         <h1 className="text-[20px] text-start" onClick={handleClick}>

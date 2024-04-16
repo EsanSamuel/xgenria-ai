@@ -56,7 +56,7 @@ const page = () => {
               width={100}
               height={100}
               alt={username}
-              className="rounded-[10px] w-[200px] h-[200px]"
+              className=" w-[200px] h-[200px] rounded-full"
             />
           </div>
         ) : (
@@ -66,7 +66,7 @@ const page = () => {
               width={100}
               height={100}
               alt={user?.username}
-              className="rounded-[10px] w-[200px] h-[200px]"
+              className="rounded-full w-[200px] h-[200px]"
             />
           </div>
         )}

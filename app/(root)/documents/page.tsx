@@ -7,10 +7,16 @@ import usePrompt from "@/hooks/usePrompts";
 import useUser from "@/hooks/useUser";
 import useModal from "@/hooks/zustand/useModal";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { CSSProperties } from "react";
 import { IoClose, IoFilterOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { CiFileOff } from "react-icons/ci";
+import Offline from "@/components/Offline";
+import useNetworkStatus from "@/hooks/useNetworkStatus";
+import FadeLoader from "react-spinners/FadeLoader";
+import usePinned from "@/hooks/usePinned";
+import { VscPinned } from "react-icons/vsc";
+import PinnedCard from "@/components/PinnedCard";
 
 type documentProps = {
   id: string;
@@ -18,6 +24,7 @@ type documentProps = {
   tag: string;
   promptData: string;
   createdAt: string;
+  starId: string[];
   user: {
     id: string;
     username: string;
@@ -26,12 +33,34 @@ type documentProps = {
   };
 };
 
+interface PinnedProps {
+  id: string;
+  prompt: {
+    id: string;
+    title: string;
+    tag: string;
+    promptData: string;
+    createdAt: string;
+    starId: string[];
+  };
+  user: {
+    id: string;
+    username: string;
+    image: string;
+    email: string;
+  };
+  createdAt: string;
+}
+
 const page = () => {
   const { data: session } = useSession();
   const modal = useModal();
   const router = useRouter();
+  const { isOnline } = useNetworkStatus();
   const [search, setSearch] = React.useState<string>("");
-  const { data: document = [] } = usePrompt(`/api/prompt/${session?.user?.id}`);
+  const { data: document = [], isLoading } = usePrompt(
+    `/api/prompt/${session?.user?.id}`
+  );
   console.log(document);
   const { data: user } = useUser(`/api/user/${session?.user?.id}`);
   const [filterByTags, setFilterByTags] = useLocalStorage<string>(
@@ -47,6 +76,11 @@ const page = () => {
     if (date < 12) return "Good morning";
     if (date < 18) return "Good eafternoon";
     return "Good evening";
+  };
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "#0C78F9",
   };
   const handleFilter = (tag: string) => {
     switch (tag) {
@@ -67,14 +101,33 @@ const page = () => {
     }
   };
 
-  if (document.lenth === 0) {
+  const { data: pinned } = usePinned(`/api/pinned/${session?.user?.id}`);
+
+  if (isLoading) {
     return (
-      <div className="text-center pt-[20%]">
-        <CiFileOff size={40} />
-        <h1>No Documents created yet!</h1>
+      <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
+        <FadeLoader
+          color="#0C78F9"
+          loading={isLoading}
+          cssOverride={override}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        <h1 className="text-[14px]">Loading documents...</h1>
       </div>
     );
-  } else
+  }
+
+  if (!document) {
+    return (
+      <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
+        <CiFileOff />
+        <h1 className="text-[14px]">No documents yet</h1>
+      </div>
+    );
+  }
+
+  if (isOnline) {
     return (
       <div className="text-white p-5 py-10 w-full">
         {/*<AuthProvider />*/}
@@ -83,6 +136,20 @@ const page = () => {
         here are your documents documents.*/}
           Documents
         </h1>
+
+        <div className="py-5 ">
+          <h1 className="text-[15px] pb-5 flex gap-2 items-center">
+            <VscPinned />
+            Pinned Documents
+          </h1>
+          <div className="flex gap-3 overflow-auto">
+            {pinned?.map((pin: PinnedProps) => (
+              <div className="" key={pin.id}>
+                <PinnedCard pin={pin} />
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="mt-5 flex gap-2 items-center">
           <input
             className="flex-grow  w-full  rounded-[10px] outline-none p-3 bg-dark-1"
@@ -95,27 +162,29 @@ const page = () => {
             className="cursor-pointer"
           />
         </div>
-        <div className="grid md:grid-cols-1 grid-col-2 gap-5 mt-10 w-full">
-          {filterTags(filterByTags)
-            .filter((document: documentProps) => {
-              if (search === "") {
-                return document;
-              } else {
-                if (
-                  document.title
-                    .toLowerCase()
-                    .includes(search.toLocaleLowerCase())
-                ) {
+        <>
+          <div className="grid md:grid-cols-2 gap-5 mt-10 w-full">
+            {filterTags(filterByTags)
+              .filter((document: documentProps) => {
+                if (search === "") {
                   return document;
+                } else {
+                  if (
+                    document.title
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase())
+                  ) {
+                    return document;
+                  }
                 }
-              }
-            })
-            .map((document: documentProps) => (
-              <div key={document.id} className="w-full">
-                <Card document={document} />
-              </div>
-            ))}
-        </div>
+              })
+              .map((document: documentProps) => (
+                <div key={document.id} className="w-full">
+                  <Card document={document} />
+                </div>
+              ))}
+          </div>
+        </>
 
         {modal.isOpen === true && (
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
@@ -161,6 +230,9 @@ const page = () => {
         )}
       </div>
     );
+  } else {
+    return <Offline />;
+  }
 };
 
 export default page;

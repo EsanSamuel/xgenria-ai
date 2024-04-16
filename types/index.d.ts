@@ -5,3 +5,7 @@ interface UserWhereInput {
 interface UserOrderByWithRelationInput {
   createdAt: string;
 }
+
+interface Window {
+  webkitSpeechRecognition: any;
+}

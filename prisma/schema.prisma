@@ -54,6 +54,7 @@ model Pinned {
 model Recent {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   recent    String
+  prompt    String?
   userId    String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

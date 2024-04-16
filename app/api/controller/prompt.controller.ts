@@ -204,11 +204,12 @@ class PromptController {
 
   static async addRecent(request: Request, { params }: Params) {
     try {
-      const { user_Id, recent } = await request.json();
+      const { user_Id, recent, prompt } = await request.json();
       const addrecent = await prisma.recent.create({
         data: {
           userId: user_Id,
           recent,
+          prompt,
         },
       });
       return new Response(
@@ -223,6 +224,7 @@ class PromptController {
       );
     }
   }
+
   static async getRecents(request: Request, { params }: Params) {
     try {
       const userId = params.id;
@@ -253,6 +255,77 @@ class PromptController {
   static async deleteRecent(request: Request, { params }: Params) {
     try {
       const deleterecent = await prisma.recent.delete({
+        where: {
+          id: params.id,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Recent deletes!", deleterecent)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
+  static async pinnDocument(request: Request, { params }: Params) {
+    try {
+      const promptId = params.id;
+      const { user_Id } = await request.json();
+      const addpinned = await prisma.pinned.create({
+        data: {
+          userId: user_Id,
+          promptId,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(201, "Recent prompt added!", addpinned)),
+        { status: 201 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
+  static async getPinnedDocument(request: Request, { params }: Params) {
+    try {
+      const userId = params.id;
+      const getpinned = await prisma.pinned.findMany({
+        where: {
+          userId,
+        },
+        include: {
+          user: true,
+          prompt: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Recents gotten!", getpinned)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
+  static async deletePinned(request: Request, { params }: Params) {
+    try {
+      const deleterecent = await prisma.pinned.delete({
         where: {
           id: params.id,
         },

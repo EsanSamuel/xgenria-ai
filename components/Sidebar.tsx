@@ -60,10 +60,19 @@ const Sidebar = () => {
             </Link>
           )}
 
-          <li className="flex gap-2 hover:text-white hover:bg-blue-1 rounded py-3 px-2 cursor-pointer items-center">
-            <IoSettingsOutline className="text-[20px]" />
-            Setting
-          </li>
+          {pathname === "/settings" ? (
+            <li className="flex gap-2 text-white bg-blue-1 rounded py-3 px-2 cursor-pointer items-center">
+              <IoSettingsOutline className="text-[20px]" />
+              Setting
+            </li>
+          ) : (
+            <Link href="/settings">
+              <li className="flex gap-2 hover:text-white hover:bg-blue-1 rounded py-3 px-2 cursor-pointer items-center">
+                <IoSettingsOutline className="text-[20px]" />
+                Setting
+              </li>
+            </Link>
+          )}
 
           {pathname === "/recent" ? (
             <Link href="/recent">
