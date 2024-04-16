@@ -76,7 +76,7 @@ const Card = ({ document }: documentProps) => {
           <VscPinned size={25} onClick={handlePinn} />
         </div>
 
-        <h1 className="text-[20px] text-start" onClick={handleClick}>
+        <h1 className="text-[20px] text-start cursor-pointer" onClick={handleClick}>
           {document.title}
         </h1>
         <p className="font-normal  text-[15px]">created {createdAt} ago</p>

@@ -17,6 +17,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import usePinned from "@/hooks/usePinned";
 import { VscPinned } from "react-icons/vsc";
 import PinnedCard from "@/components/PinnedCard";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type documentProps = {
   id: string;
@@ -139,16 +140,19 @@ const page = () => {
 
         <div className="py-5 ">
           <h1 className="text-[15px] pb-5 flex gap-2 items-center">
-            <VscPinned />
+            <VscPinned size={20} />
             Pinned Documents
           </h1>
-          <div className="flex gap-3 overflow-auto">
-            {pinned?.map((pin: PinnedProps) => (
-              <div className="" key={pin.id}>
-                <PinnedCard pin={pin} />
-              </div>
-            ))}
-          </div>
+          <ScrollArea className="w-[1200px] whitespace-nowrap">
+            <div className="flex gap-3 w-full">
+              {pinned?.map((pin: PinnedProps) => (
+                <div className="" key={pin.id}>
+                  <PinnedCard pin={pin} />
+                </div>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
         </div>
         <div className="mt-5 flex gap-2 items-center">
           <input

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { formatDistanceToNowStrict } from "date-fns";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { TbPinnedOff } from "react-icons/tb";
@@ -26,6 +27,7 @@ type PinnedProps = {
 };
 
 const PinnedCard = ({ pin }: PinnedProps) => {
+  const router = useRouter();
   const createdAt = React.useMemo(() => {
     if (!pin?.createdAt) {
       return null;
@@ -33,6 +35,10 @@ const PinnedCard = ({ pin }: PinnedProps) => {
     const date = pin?.createdAt;
     return formatDistanceToNowStrict(new Date(date));
   }, [document]);
+
+  const handleClick = () => {
+    router.push(`/prompt?id=${pin.prompt.id}`);
+  };
 
   async function unPinn() {
     try {
@@ -45,9 +51,13 @@ const PinnedCard = ({ pin }: PinnedProps) => {
   }
 
   return (
-    <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 min-w-[250px]">
-      <TbPinnedOff size={18} className="text-right" onClick={unPinn} />
-      <h1 className="text-[17px]">{pin.prompt.title}</h1>
+    <div className="flex  w-full flex-col gap-3 justify-between  rounded-[14px] bg-dark-1 px-5 py-8 min-w-[300px]">
+      <div className="flex justify-between">
+        <h1 className="text-[17px] cursor-pointer" onClick={handleClick}>
+          {pin.prompt.title}
+        </h1>
+        <TbPinnedOff size={18} className="" onClick={unPinn} />
+      </div>
       <p className="text-[14px]">Pinned {createdAt} ago</p>
     </div>
   );
