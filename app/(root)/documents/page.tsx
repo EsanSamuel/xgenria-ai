@@ -1,5 +1,4 @@
 "use client";
-import AuthProvider from "@/components/AuthProvider";
 import Card from "@/components/Card";
 import Sidebar from "@/components/Sidebar";
 import useLocalStorage from "@/hooks/useLocalStorage";
@@ -9,7 +8,7 @@ import useModal from "@/hooks/zustand/useModal";
 import { useSession } from "next-auth/react";
 import React, { CSSProperties } from "react";
 import { IoClose, IoFilterOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { CiFileOff } from "react-icons/ci";
 import Offline from "@/components/Offline";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
@@ -54,10 +53,20 @@ interface PinnedProps {
 }
 
 const page = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const modal = useModal();
   const router = useRouter();
   const { isOnline } = useNetworkStatus();
+  React.useEffect(() => {
+    const sessionTimeOut = setTimeout(() => {
+      if (!session?.user) redirect("/login");
+    }, 7000);
+
+    return () => clearTimeout(sessionTimeOut);
+  }, [session?.user]);
+
+  if (status === "unauthenticated") redirect("/login");
+
   const [search, setSearch] = React.useState<string>("");
   const { data: document = [], isLoading } = usePrompt(
     `/api/prompt/${session?.user?.id}`
@@ -130,8 +139,7 @@ const page = () => {
 
   if (isOnline) {
     return (
-      <div className="text-white p-5 py-10 w-full">
-        {/*<AuthProvider />*/}
+      <div className="text-white md:p-5 p-3 py-10 w-full">
         <h1 className="text-[22px]">
           {/*{getDay()} {user?.username},<br />
         here are your documents documents.*/}
@@ -143,7 +151,7 @@ const page = () => {
             <VscPinned size={20} />
             Pinned Documents
           </h1>
-          <ScrollArea className="w-[1200px] whitespace-nowrap">
+          <ScrollArea className="md:w-[1200px] w-full whitespace-nowrap">
             <div className="flex gap-3 w-full">
               {pinned?.map((pin: PinnedProps) => (
                 <div className="" key={pin.id}>

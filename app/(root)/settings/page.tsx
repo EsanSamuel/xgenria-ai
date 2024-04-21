@@ -10,7 +10,9 @@ const page = () => {
   const { data: session } = useSession();
   const [username, setUsername] = React.useState<string>("");
   const [image, setImage] = React.useState<string>("");
-  const { data: user } = useUser(`/api/user/${session?.user?.id}`);
+  const { data: user } = useUser(
+    session?.user?.id ? `/api/user/${session?.user?.id}` : ""
+  );
 
   async function handleEdit() {
     try {
@@ -24,8 +26,10 @@ const page = () => {
     }
   }
   React.useEffect(() => {
-    setUsername(user?.username as string);
-    setImage(user?.image as string);
+    setUsername((user?.username as string) || "");
+    setImage((user?.image as string) || "");
+    console.log("username:", user?.username as string);
+    console.log("image:", user?.image as string);
   }, [user]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +66,7 @@ const page = () => {
         ) : (
           <div>
             <Image
-              src={user?.image}
+              src={user?.image || ""}
               width={100}
               height={100}
               alt={user?.username}

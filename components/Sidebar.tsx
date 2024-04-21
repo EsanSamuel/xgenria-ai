@@ -7,7 +7,7 @@ import {
 } from "react-icons/io5";
 import { PiGooglePodcastsLogoBold } from "react-icons/pi";
 import { usePathname, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import useUser from "@/hooks/useUser";
 import Link from "next/link";
@@ -19,11 +19,16 @@ const Sidebar = () => {
   const { data: session } = useSession();
   const { data: user } = useUser(`/api/user/${session?.user?.id}`);
   const pathname = usePathname();
+  async function handleSignOut() {
+    await signOut();
+  }
   if (
     pathname !== "/" &&
     pathname !== "/prompt" &&
     pathname !== "/editPrompt" &&
-    pathname !== "/settings"
+    pathname !== "/settings" &&
+    pathname !== "/signin" &&
+    pathname !== "/login"
   ) {
     return (
       <div className="sticky top-0 p-5 flex-col flex gap-8 h-screen  border-neutral-700 min-w-[250px] text-[#fff] bg-dark-1 max-sm:hidden ">
@@ -90,25 +95,22 @@ const Sidebar = () => {
             </Link>
           )}
 
-          {user ? (
-            <li className="flex gap-2  rounded py-3 px-2 cursor-pointer items-center fixed bottom-5">
-              <Avatar>
-                <AvatarImage
-                  src={user?.image!}
-                  alt=""
-                  width={100}
-                  height={100}
-                  className=""
-                />
-                <AvatarFallback>DP</AvatarFallback>
-              </Avatar>
-              {user?.username}
-            </li>
-          ) : (
-            <li className="flex gap-2  rounded py-3 px-2 cursor-pointer items-center fixed bottom-5">
-              <AuthProvider />
-            </li>
-          )}
+          <li
+            className="flex gap-2  rounded py-3 px-2 cursor-pointer items-center fixed bottom-5"
+            onClick={handleSignOut}
+          >
+            <Avatar>
+              <AvatarImage
+                src={user?.image!}
+                alt=""
+                width={100}
+                height={100}
+                className=""
+              />
+              <AvatarFallback>DP</AvatarFallback>
+            </Avatar>
+            {user?.username}
+          </li>
         </ul>
       </div>
     );

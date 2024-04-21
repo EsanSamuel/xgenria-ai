@@ -1,6 +1,7 @@
 import prisma from "@/prisma/prismadb";
 import { ApiSuccess, ApiError } from "../utils/ApiResponse";
 import { v2 as cloudinary } from "cloudinary";
+import bcrypt from "bcrypt";
 
 type Params = {
   params: {
@@ -15,6 +16,31 @@ cloudinary.config({
 });
 
 class UserController {
+  static async createUser(request: Request, { params }: Params) {
+    try {
+      const { username, email, password } = await request.json();
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const user = await prisma.user.create({
+        data: {
+          username,
+          email,
+          password: hashedPassword,
+        },
+      });
+
+      return new Response(
+        JSON.stringify(new ApiSuccess(201, "user gotten!", user)),
+        { status: 201 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "error fetching user!!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
   static async getUser(request: Request, { params }: Params) {
     try {
       const user = await prisma.user.findUnique({

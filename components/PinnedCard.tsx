@@ -53,7 +53,7 @@ const PinnedCard = ({ pin }: PinnedProps) => {
   return (
     <div className="flex  w-full flex-col gap-3 justify-between  rounded-[14px] bg-dark-1 px-5 py-8 min-w-[300px]">
       <div className="flex justify-between">
-        <h1 className="text-[17px] cursor-pointer" onClick={handleClick}>
+        <h1 className="text-[17px] cursor-pointer line-clamp" onClick={handleClick}>
           {pin.prompt.title}
         </h1>
         <TbPinnedOff size={18} className="" onClick={unPinn} />
