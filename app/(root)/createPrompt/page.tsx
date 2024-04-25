@@ -198,29 +198,35 @@ const page = () => {
       {modal.isOpen === true && (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
           <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
-            <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
-              <IoClose size={20} className="text-right" onClick={closeModal} />
-              <h3>Are you sure you want to save prompt as a document?</h3>
-              <Input
-                onChange={handleChange("title")}
-                placeholder="Enter Title"
-                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-              />
-              <select
-                onChange={handleChange("tag")}
-                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-2 bg-dark-1 text-[13px]"
-              >
-                <option>Select Tag</option>
-                <option>Science</option>
-                <option>English</option>
-                <option>Programming</option>
-              </select>
-              <button
-                className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
-                onClick={createDocument}
-              >
-                Save as Document
-              </button>
+            <div className="flex justify-center items-center h-full sm:flex p-3">
+              <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
+                <IoClose
+                  size={20}
+                  className="text-right"
+                  onClick={closeModal}
+                />
+                <h3>Are you sure you want to save prompt as a document?</h3>
+                <Input
+                  onChange={handleChange("title")}
+                  placeholder="Enter Title"
+                  className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                />
+                <select
+                  onChange={handleChange("tag")}
+                  className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-2 bg-dark-1 text-[13px]"
+                >
+                  <option>Select Tag</option>
+                  <option>Science</option>
+                  <option>English</option>
+                  <option>Programming</option>
+                </select>
+                <button
+                  className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
+                  onClick={createDocument}
+                >
+                  Save as Document
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -229,17 +235,19 @@ const page = () => {
       {loading && (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
           <div className="relative w-full lg:w-2/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
-            <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1 text-center text-white shadow-lg outline-none focus:outline-none">
-              <FadeLoader
-                color="#0C78F9"
-                loading={loading}
-                cssOverride={override}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-              <p className="text-[14px] text-white pt-5">
-                Creating document...
-              </p>
+            <div className="flex justify-center items-center h-full sm:flex p-3">
+              <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1 text-center text-white shadow-lg outline-none focus:outline-none">
+                <FadeLoader
+                  color="#0C78F9"
+                  loading={loading}
+                  cssOverride={override}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+                <p className="text-[14px] text-white pt-5">
+                  Creating document...
+                </p>
+              </div>
             </div>
           </div>
         </div>
