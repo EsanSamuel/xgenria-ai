@@ -52,7 +52,15 @@ interface PinnedProps {
   createdAt: string;
 }
 
-const page = () => {
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Document />
+    </Suspense>
+  );
+};
+
+const Document = () => {
   const { data: session, status } = useSession();
   const modal = useModal();
   const { isOnline } = useNetworkStatus();
@@ -252,4 +260,4 @@ const page = () => {
   }
 };
 
-export default page;
+export default Page;
