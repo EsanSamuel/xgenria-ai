@@ -9,6 +9,14 @@ import React, { CSSProperties, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+    <Edit />
+  </Suspense>
+  )
+};
+
 const Edit = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,10 +38,9 @@ const Edit = () => {
     borderColor: "#0C78F9",
   };
 
-  
   React.useEffect(() => {
     // Check if navigator is available (client-side)
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Code that accesses navigator
       // You can put the code here or call a function that contains the code
     }
@@ -121,4 +128,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default Page;
