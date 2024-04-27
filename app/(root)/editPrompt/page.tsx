@@ -30,6 +30,15 @@ const Edit = () => {
     borderColor: "#0C78F9",
   };
 
+  
+  React.useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof window !== 'undefined') {
+      // Code that accesses navigator
+      // You can put the code here or call a function that contains the code
+    }
+  }, []);
+
   async function handleEdit() {
     setLoading(true);
     const response = await axios.patch(`/api/prompt/${documentId}`, {

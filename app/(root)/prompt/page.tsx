@@ -13,6 +13,15 @@ const page = () => {
   const handleEdit = () => {
     router.push(`/editPrompt?id=${documentId}`);
   };
+
+  
+  React.useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof window !== 'undefined') {
+      // Code that accesses navigator
+      // You can put the code here or call a function that contains the code
+    }
+  }, []);
   return (
     <Suspense fallback={<div>Loading...</div>}>
     <div className="text-start sm:px-[20%] sm:py-20 p-5 text-white w-full">

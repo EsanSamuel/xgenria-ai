@@ -115,6 +115,14 @@ const page = () => {
       console.log(error);
     }
   }
+
+  React.useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof window !== 'undefined') {
+      // Code that accesses navigator
+      // You can put the code here or call a function that contains the code
+    }
+  }, []);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="flex flex-col justify-center items-center overflow-auto w-full">

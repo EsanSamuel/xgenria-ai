@@ -102,6 +102,14 @@ const page = () => {
         break;
     }
   };
+  
+  React.useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof window !== 'undefined') {
+      // Code that accesses navigator
+      // You can put the code here or call a function that contains the code
+    }
+  }, []);
 
   const { data: pinned } = usePinned(`/api/pinned/${session?.user?.id}`);
 

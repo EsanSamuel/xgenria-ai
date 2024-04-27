@@ -37,6 +37,14 @@ const page = () => {
     borderColor: "#0C78F9",
   };
 
+  React.useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof window !== "undefined") {
+      // Code that accesses navigator
+      // You can put the code here or call a function that contains the code
+    }
+  }, []);
+
   if (isLoading) {
     return (
       <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
