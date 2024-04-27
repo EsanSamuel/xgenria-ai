@@ -31,7 +31,6 @@ const Page = () => {
 
 const Recent = () => {
   const { data: session } = useSession();
-  const { isOnline } = useNetworkStatus();
   const {
     data: recents = [],
     error,

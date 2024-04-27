@@ -63,7 +63,6 @@ const Page = () => {
 const Document = () => {
   const { data: session, status } = useSession();
   const modal = useModal();
-  const { isOnline } = useNetworkStatus();
 
   //if (status === "unauthenticated" && status !== "loading") redirect("/login");
 
