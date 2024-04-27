@@ -1,7 +1,7 @@
 "use client";
 import useRecents from "@/hooks/useRecent";
 import { useSession } from "next-auth/react";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, Suspense } from "react";
 import RecentCard from "@/components/RecentCard";
 import { CiFileOff } from "react-icons/ci";
 import Offline from "@/components/Offline";
@@ -21,7 +21,15 @@ type recentProps = {
   prompt: string;
 };
 
-const page = () => {
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Recent />
+    </Suspense>
+  );
+};
+
+const Recent = () => {
   const { data: session } = useSession();
   const { isOnline } = useNetworkStatus();
   const {
@@ -87,4 +95,4 @@ const page = () => {
   }
 };
 
-export default page;
+export default Page;
