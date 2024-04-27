@@ -8,18 +8,22 @@ const useNetworkStatus = () => {
   };
 
   React.useEffect(() => {
-    updateNetworkStatus();
+    if (typeof window !== "undefined") {
+      updateNetworkStatus();
+    }
   }, []);
 
   React.useEffect(() => {
-    window.addEventListener("load", updateNetworkStatus);
-    window.addEventListener("online", updateNetworkStatus);
-    window.addEventListener("offline", updateNetworkStatus);
-    return () => {
+    if (typeof window !== "undefined") {
       window.addEventListener("load", updateNetworkStatus);
       window.addEventListener("online", updateNetworkStatus);
       window.addEventListener("offline", updateNetworkStatus);
-    };
+      return () => {
+        window.addEventListener("load", updateNetworkStatus);
+        window.addEventListener("online", updateNetworkStatus);
+        window.addEventListener("offline", updateNetworkStatus);
+      };
+    }
   }, [navigator.onLine]);
 
   return { isOnline };
