@@ -1,7 +1,7 @@
 "use client";
 import usePrompt from "@/hooks/usePrompts";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 
 const page = () => {
@@ -14,6 +14,7 @@ const page = () => {
     router.push(`/editPrompt?id=${documentId}`);
   };
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="text-start sm:px-[20%] sm:py-20 p-5 text-white w-full">
       <div className="flex justify-between">
         <div className="flex gap-4 items-center">
@@ -36,6 +37,7 @@ const page = () => {
         />
       </div>
     </div>
+    </Suspense>
   );
 };
 
