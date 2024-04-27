@@ -84,4 +84,7 @@ export const authOptions: AuthOptions = {
       }
     },
   },
+  theme: {
+    colorScheme: "dark",
+  },
 };
