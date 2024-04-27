@@ -8,6 +8,7 @@ import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Provider = {
   id: string;
@@ -23,6 +24,7 @@ type Providers = Record<string, Provider>;
 const AuthProvider = () => {
   const [providers, setProviders] = React.useState<Providers | null>(null);
   const [inputType, setInputType] = React.useState<string>("password");
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
   React.useEffect(() => {
     const setupProvider = async () => {
@@ -54,6 +56,10 @@ const AuthProvider = () => {
 
   async function handleSignin({ username, email, password }: TSchema) {
     try {
+      setIsLoading(true);
+      if (isLoading) {
+        toast.loading("Signing in...");
+      }
       const response = await axios.post("/api/user", {
         username,
         email,
@@ -66,6 +72,8 @@ const AuthProvider = () => {
         email,
         password,
       });
+      setIsLoading(false);
+      toast.success("Signed in successfully!");
     } catch (error) {
       console.log(error);
     }

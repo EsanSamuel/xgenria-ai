@@ -106,7 +106,10 @@ const CreatePrompt = () => {
   }
 
   async function createDocument() {
-    try {
+    if (!title || !tag) {
+      toast.error("Fill the form!");
+      return null;
+    } else {
       setLoading(true);
       const response = await axios.post("/api/prompt", {
         user_Id: session?.user?.id,
@@ -119,8 +122,6 @@ const CreatePrompt = () => {
       setLoading(false);
       router.push("/documents");
       toast.success("Document created!");
-    } catch (error) {
-      console.log(error);
     }
   }
 

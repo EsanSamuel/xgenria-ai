@@ -51,6 +51,7 @@ const AuthProvider = () => {
         password,
       });
       setIsLoading(false);
+      toast.success("Logged in successful!");
     } catch (error) {
       console.log(error);
     }
