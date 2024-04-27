@@ -67,7 +67,7 @@ const Recent = () => {
     );
   }
 
-  if (!recents) {
+  if (recents < 1) {
     return (
       <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
         <CiFileOff />

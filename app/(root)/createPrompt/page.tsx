@@ -177,7 +177,10 @@ const CreatePrompt = () => {
             </div>
           )}
           <div className="flex fixed flex-row bottom-2 gap-2 w-screen items-center md:max-w-screen-lg mx-auto p-0">
-            <form onSubmit={handleSubmit} className="flex gap-2 md:max-w-screen-lg mx-auto w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="flex gap-2 md:max-w-screen-lg mx-auto w-full"
+            >
               <Input
                 onChange={handleInputChange}
                 placeholder="Enter Prompt"
@@ -223,7 +226,7 @@ const CreatePrompt = () => {
                   className="text-right"
                   onClick={closeModal}
                 />
-                <h3 className="md:text-[12px] text-[10px]">
+                <h3 className="md:text-[15px] text-[13px]">
                   Are you sure you want to save prompt as a document?
                 </h3>
                 <Input

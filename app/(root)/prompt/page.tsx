@@ -34,7 +34,7 @@ const Prompt = () => {
       <div className="text-start sm:px-[20%] sm:py-20 p-5 text-white w-full">
         <div className="flex justify-between">
           <div className="flex gap-4 items-center">
-            <h1 className="md:text-[25px] text-[14px] font-bold">
+            <h1 className="md:text-[25px] text-[16px] font-bold">
               {documentItem?.title}
             </h1>
             <Badge>{documentItem?.tag}</Badge>
