@@ -28,6 +28,10 @@ const AuthProvider = () => {
     formState: { errors },
   } = useForm<TSchema>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   if (status === "authenticated") redirect("/documents");

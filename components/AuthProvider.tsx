@@ -44,6 +44,10 @@ const AuthProvider = () => {
     formState: { errors },
   } = useForm<TSchema>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   async function handleSignin({ username, email, password }: TSchema) {
