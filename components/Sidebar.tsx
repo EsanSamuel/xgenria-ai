@@ -14,13 +14,16 @@ import Link from "next/link";
 import { AvatarImage, Avatar, AvatarFallback } from "./ui/avatar";
 import { RiHistoryLine } from "react-icons/ri";
 import AuthProvider from "./AuthProvider";
+import { Router } from "next/router";
 
 const Sidebar = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const { data: user } = useUser(`/api/user/${session?.user?.id}`);
   const pathname = usePathname();
   async function handleSignOut() {
     await signOut();
+    router.push("/login");
   }
   if (
     pathname !== "/" &&

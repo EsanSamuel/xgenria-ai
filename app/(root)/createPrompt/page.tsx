@@ -176,52 +176,56 @@ const CreatePrompt = () => {
               )}
             </div>
           )}
-          <form
-            onSubmit={handleSubmit}
-            className="flex gap-2 fixed bottom-0 w-full md:max-w-screen-lg mx-auto w-full md:p-3"
-          >
-            <Input
-              onChange={handleInputChange}
-              placeholder="Enter Prompt"
-              className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
-              value={input}
-              ref={inputRef}
-            />
-            {isListening ? (
+          <div className="flex fixed flex-row bottom-2 gap-2 w-screen items-center md:max-w-screen-lg mx-auto p-0">
+            <form onSubmit={handleSubmit} className="flex gap-2 md:max-w-screen-lg mx-auto w-full">
+              <Input
+                onChange={handleInputChange}
+                placeholder="Enter Prompt"
+                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
+                value={input}
+                ref={inputRef}
+              />
+
               <button
+                onClick={handleSubmit}
                 className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
-                onClick={startRecording}
               >
-                <FaMicrophoneSlash size={20} />
+                <IoSendOutline size={20} />
               </button>
-            ) : (
-              <button
-                className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
-                onClick={startRecording}
-              >
-                <TiMicrophoneOutline size={20} />
-              </button>
-            )}
-            <button
-              onClick={handleSubmit}
-              className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
-            >
-              <IoSendOutline size={20} />
-            </button>
-          </form>
+            </form>
+            <div className="">
+              {isListening ? (
+                <button
+                  className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                  onClick={startRecording}
+                >
+                  <FaMicrophoneSlash size={20} />
+                </button>
+              ) : (
+                <button
+                  className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                  onClick={startRecording}
+                >
+                  <TiMicrophoneOutline size={20} />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       {modal.isOpen === true && (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
           <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
             <div className="flex justify-center items-center h-full sm:flex p-3">
-              <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-10 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
+              <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  md:p-10 p-5 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
                 <IoClose
                   size={20}
                   className="text-right"
                   onClick={closeModal}
                 />
-                <h3>Are you sure you want to save prompt as a document?</h3>
+                <h3 className="md:text-[12px] text-[10px]">
+                  Are you sure you want to save prompt as a document?
+                </h3>
                 <Input
                   onChange={handleChange("title")}
                   placeholder="Enter Title"
@@ -260,7 +264,7 @@ const CreatePrompt = () => {
                   aria-label="Loading Spinner"
                   data-testid="loader"
                 />
-                <p className="text-[14px] text-white pt-5">
+                <p className="md:text-[14px] text-[13px] text-white pt-5">
                   Creating document...
                 </p>
               </div>
