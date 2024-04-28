@@ -1,6 +1,8 @@
 "use client";
 import runChat from "@/config/gemini";
 import React from "react";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 export type PromptType = {
   input: string;
@@ -13,6 +15,7 @@ export type PromptType = {
 export const PromptContext = React.createContext<PromptType | null>(null);
 
 export const PromptProvider = ({ children }: { children: React.ReactNode }) => {
+  const { data: session } = useSession();
   const [input, setInput] = React.useState<string>("");
   const [promptData, setPromptData] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -33,6 +36,17 @@ export const PromptProvider = ({ children }: { children: React.ReactNode }) => {
     }
     let newResponse = promptArray!.split("*").join("</br>");
     setPromptData(newResponse as string);
+
+    try {
+      const Recentresponse = await axios.post("/api/recent", {
+        user_Id: session?.user?.id,
+        recent: input,
+        prompt: newResponse,
+      });
+      console.log(Recentresponse.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <PromptContext.Provider

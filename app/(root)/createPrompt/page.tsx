@@ -50,17 +50,6 @@ const CreatePrompt = () => {
     e.preventDefault();
     setRecentPromptValue("");
     sendPrompt();
-    try {
-      const response = await axios.post("/api/recent", {
-        user_Id: session?.user?.id,
-        recent: input,
-        prompt: promptData,
-      });
-      console.log(response.data);
-      //setInput("");
-    } catch (error) {
-      console.log(error);
-    }
   }
   const openModal = () => {
     modal.onOpen();

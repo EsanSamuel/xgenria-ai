@@ -54,7 +54,7 @@ const Recent = () => {
 
   if (isLoading) {
     return (
-      <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
+      <div className="text-center flex justify-center gap-3 md:mt-0 mt-20 items-center flex-col  w-full text-white">
         <FadeLoader
           color="#0C78F9"
           loading={isLoading}
@@ -69,8 +69,8 @@ const Recent = () => {
 
   if (recents < 1) {
     return (
-      <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20] w-full text-white">
-        <CiFileOff />
+      <div className="text-center flex justify-center gap-3 md:mt-0 mt-20 items-center flex-col  w-full text-white">
+        <CiFileOff size={50} />
         <h1 className="text-[14px]">No recents yet</h1>
       </div>
     );
