@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { setConfig } from "next/config";
@@ -15,6 +15,7 @@ const AuthProvider = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [inputType, setInputType] = React.useState<string>("password");
   const { data: session, status } = useSession();
+  const router = useRouter();
   const schema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
@@ -77,19 +78,25 @@ const AuthProvider = () => {
               >
                 <h1 className="text-center text-[20px] font-bold">Login</h1>
 
-                <Input
-                  className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-                  {...register("email")}
-                  placeholder="Enter Email"
-                  type="email"
-                />
-                <div>
+                <label>
+                  <p className="text-[13px] pb-1">Enter Email:</p>
                   <Input
                     className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-                    type={inputType}
-                    {...register("password")}
-                    placeholder="Enter Password"
+                    {...register("email")}
+                    placeholder="Enter Email"
+                    type="email"
                   />
+                </label>
+                <div>
+                  <label>
+                    <p className="text-[13px] pb-1">Enter Password:</p>
+                    <Input
+                      className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                      type={inputType}
+                      {...register("password")}
+                      placeholder="Enter Password"
+                    />
+                  </label>
                   <div className="flex gap-3 mt-2 items-center">
                     <Input
                       type="checkbox"
@@ -114,6 +121,15 @@ const AuthProvider = () => {
                 <FcGoogle size={20} />
                 Continue with Google
               </button>
+              <h1 className="text-[13px]">
+                Don't have an account?
+                <span
+                  className="underline cursor-pointer ml-1"
+                  onClick={() => router.push("/signin")}
+                >
+                  signin
+                </span>
+              </h1>
             </div>
           </div>
         </div>

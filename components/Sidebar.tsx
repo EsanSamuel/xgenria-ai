@@ -100,7 +100,7 @@ const Sidebar = () => {
 
           <li
             className="flex gap-2  rounded py-3 px-2 cursor-pointer items-center fixed bottom-5"
-            onClick={handleSignOut}
+            onClick={() => handleSignOut()}
           >
             <Avatar>
               <AvatarImage

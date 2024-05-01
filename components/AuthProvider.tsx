@@ -101,23 +101,32 @@ const AuthProvider = () => {
                   <h1 className="text-center text-[20px] font-bold">
                     Create an Account
                   </h1>
-                  <Input
-                    className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-                    placeholder="Enter Username"
-                    {...register("username")}
-                  />
-                  <Input
-                    className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-                    {...register("email")}
-                    placeholder="Enter Email"
-                  />
-                  <div>
+                  <label>
+                    <p className="text-[13px] pb-1">Enter Username:</p>
                     <Input
                       className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
-                      type={inputType}
-                      {...register("password")}
-                      placeholder="Enter Password"
+                      placeholder="Enter Username"
+                      {...register("username")}
                     />
+                  </label>
+                  <label>
+                    <p className="text-[13px] pb-1">Enter Email:</p>
+                    <Input
+                      className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                      {...register("email")}
+                      placeholder="Enter Email"
+                    />
+                  </label>
+                  <div>
+                    <label>
+                      <p className="text-[13px] pb-1">Enter Password:</p>
+                      <Input
+                        className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                        type={inputType}
+                        {...register("password")}
+                        placeholder="Enter Password"
+                      />
+                    </label>
                     <div className="flex gap-3 mt-2 items-center">
                       <Input
                         type="checkbox"
@@ -148,7 +157,7 @@ const AuthProvider = () => {
                   <h1 className="text-[13px]">
                     Already have an account?
                     <span
-                      className="underline cursor-pointer ml-2"
+                      className="underline cursor-pointer ml-1"
                       onClick={() => router.push("/login")}
                     >
                       login
