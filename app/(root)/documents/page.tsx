@@ -217,12 +217,16 @@ const Document = () => {
             <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
               <div className="flex justify-center items-center h-full sm:flex p-3">
                 <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  p-5 bg-dark-1 text-start  text-white shadow-lg outline-none focus:outline-none">
-                  <IoClose
+                <div className="flex justify-between items-center">
+<> <h1 className="text-center text-[17px] font-bold">Filter By Tags</h1>
+</>
+  <IoClose
                     size={20}
                     className="text-right"
                     onClick={() => modal.onClose()}
                   />
-                  <h1 className="text-center text-[17px]">Filter By Tags</h1>
+      
+</div>
 
                   <button
                     onClick={() => handleFilter("Science")}
