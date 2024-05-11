@@ -252,6 +252,29 @@ class PromptController {
     }
   }
 
+  static async getRecentId(request: Request, { params }: Params) {
+    try {
+      const getrecents = await prisma.recent.findUnique({
+        where: {
+          id: params.id,
+        },
+        include: {
+          user: true,
+        },
+      });
+      return new Response(
+        JSON.stringify(new ApiSuccess(200, "Recent Id gotten!", getrecents)),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log(error);
+      return new Response(
+        JSON.stringify(new ApiError(500, "Something went wrong!", [error])),
+        { status: 500 }
+      );
+    }
+  }
+
   static async deleteRecent(request: Request, { params }: Params) {
     try {
       const deleterecent = await prisma.recent.delete({
