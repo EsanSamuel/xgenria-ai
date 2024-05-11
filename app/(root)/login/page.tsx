@@ -79,9 +79,9 @@ const AuthProvider = () => {
                 <h1 className="text-center text-[20px] font-bold">Login</h1>
 
                 <label>
-                  <p className="text-[13px] pb-1">Enter Email:</p>
+                  <p className="text-[13px] pb-1">Enter Email</p>
                   <Input
-                    className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                    className="flex-grow border-none w-full  rounded-full outline-none p-4 bg-dark-2"
                     {...register("email")}
                     placeholder="Enter Email"
                     type="email"
@@ -89,9 +89,9 @@ const AuthProvider = () => {
                 </label>
                 <div>
                   <label>
-                    <p className="text-[13px] pb-1">Enter Password:</p>
+                    <p className="text-[13px] pb-1">Enter Password</p>
                     <Input
-                      className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-4 bg-dark-1"
+                      className="flex-grow border-none w-full  rounded-full outline-none p-4 bg-dark-2"
                       type={inputType}
                       {...register("password")}
                       placeholder="Enter Password"
@@ -107,14 +107,14 @@ const AuthProvider = () => {
                   </div>
                 </div>
                 <button
-                  className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
+                  className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50 text-[13px]"
                   type="submit"
                 >
                   {!isLoading ? "Log In" : "Loging in..."}
                 </button>
               </form>
               <button
-                className="px-4 py-2 border border-blue-1 rounded-full w-full hover:bg-opacity-50 flex gap-5 items-center justify-center"
+                className="px-4 py-2 border border-blue-1 rounded-full w-full hover:bg-opacity-50 flex gap-5 items-center justify-center text-[13px]"
                 type="submit"
                 onClick={() => signIn("google")}
               >
