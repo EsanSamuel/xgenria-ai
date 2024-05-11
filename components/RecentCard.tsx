@@ -30,7 +30,7 @@ const RecentCard = ({ recentitem }: recentProps) => {
   }
   return (
     <div className="bg-dark-1 w-full p-3 flex justify-between cursor-pointer rounded">
-      <h1 className="text-[14px]" onClick={handleClick}>
+      <h1 className="text-[12px]" onClick={handleClick}>
         {recentitem.recent}
       </h1>
       <MdDeleteOutline
