@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { MdDeleteOutline } from "react-icons/md";
 import toast from "react-hot-toast";
 import { formatDistanceToNowStrict } from "date-fns";
+import { FcFolder } from "react-icons/fc"
 
 type documentProps = {
   document: {
@@ -72,18 +73,18 @@ const Card = ({ document }: documentProps) => {
     <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 ">
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
-          <HiOutlineDocumentDuplicate size={25} />
+          <FcFolder size={25} />
           <VscPinned size={25} onClick={handlePinn} />
         </div>
 
-        <h1 className="text-[20px] text-start cursor-pointer" onClick={handleClick}>
+        <button className="text-[20px] text-start cursor-pointer font-bold" onClick={handleClick}>
           {document.title}
-        </h1>
+        </buttn>
         <p className="font-normal  text-[15px]">created {createdAt} ago</p>
         <div className="left-2 flex justify-between items-center">
           {LikeIcon()}
           <div className="flex gap-3 items-center">
-            <button className="bg-blue-1 px-4 py-2 text-white rounded text-[13px]">
+            <button className="bg-blue-1 px-4 py-2 text-white rounded-full text-[12px]">
               {document.tag}
             </button>
             <MdDeleteOutline size={20} onClick={handleDelete} />
