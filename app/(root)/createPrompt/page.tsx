@@ -132,7 +132,7 @@ const CreatePrompt = () => {
             <div>
               {promptData && (
                 <button
-                  className="px-4 py-1 bg-blue-1 rounded-full text-[14px]"
+                  className="px-4 py-1 bg-blue-1 rounded-full text-[13px] font-bold"
                   onClick={openModal}
                 >
                   Save as Document
@@ -154,15 +154,20 @@ const CreatePrompt = () => {
           ) : (
             <div>
               {recentPromptValue?.length > 0 ? (
-                <h1
+                {/*<h1
                   className="mt-10 text-left max-w-[1200px] whitespace-normal"
                   dangerouslySetInnerHTML={{ __html: recentPromptValue }}
-                />
+                />*/}
+<>
+<textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full" readOnly></textarea>
+</>
               ) : (
-                <h1
+             {/*   <h1
                   className="mt-10 text-left max-w-[1200px] whitespace-normal"
                   dangerouslySetInnerHTML={{ __html: promptData }}
-                />
+                />*/}
+
+<textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full" readOnly></textarea>
               )}
             </div>
           )}
@@ -174,14 +179,14 @@ const CreatePrompt = () => {
               <Input
                 onChange={handleInputChange}
                 placeholder="Enter Prompt"
-                className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-3 bg-dark-2"
+                className="flex-grow border-none w-full  rounded-full outline-none p-3 bg-dark-1"
                 value={input}
                 ref={inputRef}
               />
 
               <button
                 onClick={handleSubmit}
-                className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                className="text-white bg-blue-1 rounded-[20px] px-3 py-1 hover:bg-opacity-50"
               >
                 <IoSendOutline size={20} />
               </button>
@@ -234,7 +239,7 @@ const CreatePrompt = () => {
                   <option>Programming</option>
                 </select>
                 <button
-                  className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
+                  className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50 text-[13px]"
                   onClick={createDocument}
                 >
                   Save as Document
