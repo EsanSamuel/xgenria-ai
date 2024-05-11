@@ -187,7 +187,7 @@ const router = useRouter()
         </div>
         <div className="mt-5 flex gap-2 items-center">
           <input
-            className="flex-grow  w-full  rounded-[10px] outline-none p-3 bg-dark-1"
+            className="flex-grow  w-full  rounded-[10px] outline-none p-3 bg-dark-1 text-[14px]"
             placeholder="Search Documents..."
             onChange={(e) => setSearch(e.target.value)}
           />
