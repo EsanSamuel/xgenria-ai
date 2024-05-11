@@ -166,8 +166,9 @@ const CreatePrompt = () => {
                   className="mt-10 text-left max-w-[1200px] whitespace-normal"
                   dangerouslySetInnerHTML={{ __html: promptData }}
                 />*/}
-
+<>
 <textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
+</>
               )}
             </div>
           )}
