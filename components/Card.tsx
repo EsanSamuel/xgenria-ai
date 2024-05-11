@@ -79,7 +79,7 @@ const Card = ({ document }: documentProps) => {
 
         <button className="text-[20px] text-start cursor-pointer font-bold" onClick={handleClick}>
           {document.title}
-        </buttn>
+        </button>
         <p className="font-normal  text-[15px]">created {createdAt} ago</p>
         <div className="left-2 flex justify-between items-center">
           {LikeIcon()}
