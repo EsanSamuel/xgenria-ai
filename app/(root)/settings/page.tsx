@@ -5,10 +5,12 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import useUser from "@/hooks/useUser";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const page = () => {
   const { data: session } = useSession();
   const [username, setUsername] = React.useState<string>("");
+const [loading, setLoading] = React.useState<boolean>(false);
   const [image, setImage] = React.useState<string>("");
   const { data: user } = useUser(
     session?.user?.id ? `/api/user/${session?.user?.id}` : ""
@@ -16,11 +18,14 @@ const page = () => {
 
   async function handleEdit() {
     try {
+setLoading(true)
       const response = await axios.patch(`/api/user/${session?.user?.id}`, {
         username,
         image,
       });
       console.log(response.data);
+setLoading(false)
+toast.success("Profile edited!")
     } catch (error) {
       console.log(error);
     }
@@ -94,10 +99,10 @@ const page = () => {
           </label>
         </div>
         <button
-          className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
+          className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50 text-[13px]"
           onClick={handleEdit}
         >
-          Edit Profile
+         {!loading ?  "Edit Profile" : "Editing..."}
         </button>
       </div>
     </div>
