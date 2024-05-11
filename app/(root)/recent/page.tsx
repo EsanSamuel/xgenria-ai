@@ -78,7 +78,7 @@ const Recent = () => {
 
   return (
     <div className="text-white md:p-5 p-3 py-10 w-full ">
-      <h1 className="text-[22px]">Recent Prompts</h1>
+      <h1 className="text-[20px] font-bold">Recent Prompts</h1>
       <div className="flex flex-col w-full gap-5 mt-10">
         {recents?.map((recent: recentProps) => (
           <div key={recent.id}>
