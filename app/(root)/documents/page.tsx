@@ -7,7 +7,7 @@ import useModal from "@/hooks/zustand/useModal";
 import { useSession } from "next-auth/react";
 import React, { CSSProperties, Suspense } from "react";
 import { IoClose, IoFilterOutline } from "react-icons/io5";
-import { redirect } from "next/navigation";
+import { redirect,useRouter } from "next/navigation";
 import { CiFileOff } from "react-icons/ci";
 import Offline from "@/components/Offline";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
@@ -63,6 +63,7 @@ const Page = () => {
 const Document = () => {
   const { data: session, status } = useSession();
   const modal = useModal();
+const router = useRouter()
 
   //if (status === "unauthenticated" && status !== "loading") redirect("/login");
 
@@ -154,11 +155,19 @@ const Document = () => {
     <div className="w-full">
       <MobileNav />
       <div className="text-white md:p-5 p-3 py-10">
+
+<div className="flex justify-between items-center">
+<>
         <h1 className="text-[22px]">
           {/*{getDay()} {user?.username},<br />
         here are your documents documents.*/}
           Documents
         </h1>
+</>
+            <button className="bg-[#1dc071] px-4 py-2 text-white rounded-full text-[12px] font-bold" onClick={()=>router.push("/createPrompt")}>
+              Chat 
+            </button>
+</div>
 
         <div className="py-5 ">
           <h1 className="text-[15px] pb-5 flex gap-2 items-center">
