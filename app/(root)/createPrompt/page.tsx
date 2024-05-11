@@ -159,7 +159,7 @@ const CreatePrompt = () => {
                   dangerouslySetInnerHTML={{ __html: recentPromptValue }}
                 />*/}
 <>
-<textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full" readOnly></textarea>
+<textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
               ) : (
              {/*   <h1
@@ -167,7 +167,7 @@ const CreatePrompt = () => {
                   dangerouslySetInnerHTML={{ __html: promptData }}
                 />*/}
 
-<textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full" readOnly></textarea>
+<textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
               )}
             </div>
           )}
