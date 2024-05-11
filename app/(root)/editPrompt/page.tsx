@@ -96,7 +96,7 @@ const Edit = () => {
             ></Textarea>
           </label>
           <button
-            className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50"
+            className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50 text-[13px]"
             onClick={handleEdit}
           >
             Edit Document
