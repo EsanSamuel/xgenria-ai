@@ -88,7 +88,7 @@ toast.success("Profile edited!")
               type="file"
             />
           </label>
-          <label className="flex gap-1 flex-col text-[14px]">
+          <label className="flex gap-1 flex-col text-[14px] mt-5">
             Username
             <Input
               onChange={(e) => setUsername(e.target.value)}
