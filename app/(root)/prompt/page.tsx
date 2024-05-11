@@ -49,10 +49,12 @@ const Prompt = () => {
           </div>
         </div>
         <div className="mt-10">
-          <h1
+        {/*  <h1
             dangerouslySetInnerHTML={{ __html: documentItem?.promptData }}
             className="text-[14px]"
-          />
+          />*/}
+
+<textarea value={documentItem?.promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none  h-full" readOnly></textarea>
         </div>
       </div>
     </Suspense>
