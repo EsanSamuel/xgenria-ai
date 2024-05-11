@@ -112,7 +112,7 @@ const AuthProvider = () => {
                   <label>
                     <p className="text-[13px] pb-1">Enter Email</p>
                     <Input
-                      className="flex-grow border-none w-full rounded-full outline-none p-4 bg-dark-2
+                      className="flex-grow border-none w-full rounded-full outline-none p-4 bg-dark-2"
                       {...register("email")}
                       placeholder="Enter Email"
                     />
