@@ -163,7 +163,7 @@ const {data: recent} = useRecents(`/api/recentId/${recentId}`)
             <div>
               {recentPromptValue?.length > 0 ? (
 <>
-<textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
+<textarea value={recent?.prompt} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
               ) : (
 <>
