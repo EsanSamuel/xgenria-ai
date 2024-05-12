@@ -157,10 +157,6 @@ const CreatePrompt = () => {
           ) : (
             <div>
               {recentPromptValue?.length > 0 ? (
-                {/*<h1
-                  className="mt-10 text-left max-w-[1200px] whitespace-normal"
-                  dangerouslySetInnerHTML={{ __html: recentPromptValue }}
-                />*/}
 <>
 <textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
