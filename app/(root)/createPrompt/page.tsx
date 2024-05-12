@@ -15,6 +15,7 @@ import useSpeechRecognition from "@/hooks/useSpeechRecognition";
 import { FaMicrophoneSlash } from "react-icons/fa";
 import useUser from "@/hooks/useUser";
 import Image from "next/image"
+import { FaArrowUp } from "react-icons/fa6";
 
 const Page = () => {
   return (
@@ -196,7 +197,7 @@ const CreatePrompt = () => {
                 onClick={handleSubmit}
                 className="text-white bg-blue-1 rounded-[20px] px-3 py-1 hover:bg-opacity-50"
               >
-                <IoSendOutline size={20} />
+                <FaArrowUp size={20} />
               </button>
             </form>
             <div className="">
