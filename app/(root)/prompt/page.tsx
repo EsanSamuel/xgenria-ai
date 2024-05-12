@@ -37,7 +37,7 @@ const Prompt = () => {
             <h1 className="md:text-[25px] text-[14px] font-bold">
               {documentItem?.title}
             </h1>
-            <Badge className="mt-5">{documentItem?.tag}</Badge>
+            <Badge className="mt-2">{documentItem?.tag}</Badge>
           </div>
           <div>
             <button
@@ -54,7 +54,7 @@ const Prompt = () => {
             className="text-[14px]"
           />*/}
 
-<textarea value={documentItem?.promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none text-[13px]  h-full" readOnly></textarea>
+<textarea value={documentItem?.promptData} className="w-full min-h-[600px] outline-none bg-dark-2 border-none text-[13px]  h-full" readOnly></textarea>
         </div>
       </div>
     </Suspense>
