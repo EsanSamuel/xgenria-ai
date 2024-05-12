@@ -33,15 +33,15 @@ const Prompt = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <div className="text-start sm:px-[20%] sm:py-20 p-5 text-white w-full">
         <div className="flex justify-between">
-          <div className="flex gap-4 items-center">
-            <h1 className="md:text-[25px] text-[16px] font-bold">
+          <div className="">
+            <h1 className="md:text-[25px] text-[14px] font-bold">
               {documentItem?.title}
             </h1>
-            <Badge>{documentItem?.tag}</Badge>
+            <Badge className="mt-5">{documentItem?.tag}</Badge>
           </div>
           <div>
             <button
-              className="rounded-full px-5 py-1 text-white bg-blue-1"
+              className="rounded-full px-5 py-1 text-white bg-blue-1 text-[13px]"
               onClick={handleEdit}
             >
               Edit
@@ -54,7 +54,7 @@ const Prompt = () => {
             className="text-[14px]"
           />*/}
 
-<textarea value={documentItem?.promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none  h-full" readOnly></textarea>
+<textarea value={documentItem?.promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none text-[13px]  h-full" readOnly></textarea>
         </div>
       </div>
     </Suspense>
