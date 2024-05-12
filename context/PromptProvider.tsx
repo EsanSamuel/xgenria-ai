@@ -31,10 +31,10 @@ export const PromptProvider = ({ children }: { children: React.ReactNode }) => {
       if (i === 0 || i % 2 !== 1) {
         promptArray += responseArray[i];
       } else {
-        promptArray +=  responseArray[i];
+        promptArray += responseArray[i];
       }
     }
-    let newResponse = promptArray!
+    let newResponse = promptArray!;
     setPromptData(newResponse as string);
 
     try {
