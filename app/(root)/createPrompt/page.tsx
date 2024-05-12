@@ -171,7 +171,7 @@ const CreatePrompt = () => {
                 />*/}
 <>
 {promptData && (
-<div className="w-full rounded-[10px] bg-dark-1 text-white flex gap-2 items-center">
+<div className="w-full rounded-[10px] bg-dark-1 text-white flex gap-2 items-center p-2">
 <Image src={user?.image!} width={100} height={100} className="w-[12px] h-[12px] rounded-full" alt="You"/>
 <>
 <h1 className="text-[13px]">{input}</h1>
