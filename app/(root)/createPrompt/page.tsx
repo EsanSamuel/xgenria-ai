@@ -16,6 +16,7 @@ import { FaMicrophoneSlash } from "react-icons/fa";
 import useUser from "@/hooks/useUser";
 import Image from "next/image"
 import { FaArrowUp } from "react-icons/fa6";
+import useRecents from "@/hooks/useRecent";
 
 const Page = () => {
   return (
