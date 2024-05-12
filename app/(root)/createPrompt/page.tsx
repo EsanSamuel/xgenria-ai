@@ -30,7 +30,7 @@ const CreatePrompt = () => {
   const modal = useModal();
   const searchParams = useSearchParams();
   const recentValue = searchParams.get("recentValue");
-  const recentId = searchParams.get("id");
+  const recentValueId = searchParams.get("id");
   const recentPrompt = searchParams.get("prompt");
   const { data: session } = useSession();
   const { data: user } = useUser(`/api/user/${session?.user?.id}`);
@@ -120,7 +120,7 @@ const CreatePrompt = () => {
     }
   }
 
-const {data: recent} = useRecents(`/api/recentId/${recentId}`)
+const {data: recent} = useRecents(`/api/recentId/${recentValueId}`)
 
   React.useEffect(() => {
     // Check if navigator is available (client-side)
