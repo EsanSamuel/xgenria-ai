@@ -162,10 +162,6 @@ const CreatePrompt = () => {
 <textarea value={recentPromptValue} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
               ) : (
-             {/*   <h1
-                  className="mt-10 text-left max-w-[1200px] whitespace-normal"
-                  dangerouslySetInnerHTML={{ __html: promptData }}
-                />*/}
 <>
 {promptData && (
 <div className="w-full rounded-[10px] bg-dark-1 text-white flex gap-2 items-center p-2">
