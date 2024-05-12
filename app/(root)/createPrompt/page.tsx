@@ -17,6 +17,7 @@ import useUser from "@/hooks/useUser";
 import Image from "next/image"
 import { FaArrowUp } from "react-icons/fa6";
 import useRecents from "@/hooks/useRecent";
+import { PiGooglePodcastsLogoBold } from "react-icons/pi";
 
 const Page = () => {
   return (
@@ -167,13 +168,18 @@ const {data: recent} = useRecents(`/api/recentId/${recentValueId}`)
 </>
               ) : (
 <>
-{promptData && (
+{promptData  ? (
 <div className="w-full rounded-[10px] bg-dark-1 text-white flex gap-2 items-center p-2 mt-10">
 <Image src={user?.image!} width={100} height={100} className="w-[20px] h-[20px] rounded-full" alt="You"/>
 <>
 <h1 className="text-[13px]">{input}</h1>
 </>
 </div>
+) : (
+   <div className="flex flex-col gap-2 items-center justify-center">
+                      <PiGooglePodcastsLogoBold className="text-[40px] mt-20 font-bold text-blue-1 text-center " />
+                      <h1 className='text-[13px]'>Chat with AI</h1>
+                    </div>
 )}
 <textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
