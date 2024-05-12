@@ -13,6 +13,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import { Input } from "@/components/ui/input";
 import useSpeechRecognition from "@/hooks/useSpeechRecognition";
 import { FaMicrophoneSlash } from "react-icons/fa";
+import useUser from "@/hooks/useUser";
 
 const Page = () => {
   return (
@@ -28,6 +29,7 @@ const CreatePrompt = () => {
   const recentValue = searchParams.get("recentValue");
   const recentPrompt = searchParams.get("prompt");
   const { data: session } = useSession();
+  const { data: user } = useUser(`/api/user/${session?.user?.id}`);
   const router = useRouter();
   const [title, setTitle] = React.useState<string>("");
   const [tag, setTag] = React.useState<string>("");
@@ -167,6 +169,13 @@ const CreatePrompt = () => {
                   dangerouslySetInnerHTML={{ __html: promptData }}
                 />*/}
 <>
+
+<div className="w-full rounded-[10px] bg-dark-1 text-white flex gap-2 items-center">
+<Image src={user?.image!} width={100} height={100} className="w-[12px] h-[12px] rounded-full" />
+<>
+<h1 className="text-[13px]">{input}</h1>
+</>
+</div>
 <textarea value={promptData} className="w-full min-h-[500px] outline-none bg-dark-2 border-none mt-10 h-full text-[13px]" readOnly></textarea>
 </>
               )}
