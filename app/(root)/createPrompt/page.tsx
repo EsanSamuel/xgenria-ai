@@ -191,12 +191,12 @@ const CreatePrompt = () => {
 
               <button
                 onClick={handleSubmit}
-                className="text-white bg-blue-1 rounded-[20px] px-3 py-1 hover:bg-opacity-50"
+                className="text-white bg-blue-1 rounded-lg px-3 py-1 hover:bg-opacity-50"
               >
                 <FaArrowUp size={20} />
               </button>
             </form>
-            <div className="">
+            {/*<div className="">
               {isListening ? (
                 <button
                   className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
@@ -212,7 +212,7 @@ const CreatePrompt = () => {
                   <TiMicrophoneOutline size={20} />
                 </button>
               )}
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
