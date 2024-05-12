@@ -25,7 +25,7 @@ const RecentCard = ({ recentitem }: recentProps) => {
   }
   async function handleClick() {
     router.push(
-      `/createPrompt?recentValue=${recentitem.recent}&prompt=${recentitem.prompt}`
+      `/createPrompt?recentValue=${recentitem.recent}&prompt=${recentitem.prompt}&id={recentitem?.id}`
     );
   }
   return (
