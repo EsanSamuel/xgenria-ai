@@ -196,23 +196,23 @@ const CreatePrompt = () => {
                 <FaArrowUp size={20} />
               </button>
             </form>
-            {/*<div className="">
+            <div className="">
               {isListening ? (
                 <button
-                  className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                  className="text-white bg-dark-2 px-3 py-1 rounded hover:bg-opacity-50"
                   onClick={startRecording}
                 >
                   <FaMicrophoneSlash size={20} />
                 </button>
               ) : (
                 <button
-                  className="text-white bg-blue-1 px-3 py-1 rounded hover:bg-opacity-50"
+                  className="text-white bg-dark-2 px-3 py-1 rounded hover:bg-opacity-50"
                   onClick={startRecording}
                 >
                   <TiMicrophoneOutline size={20} />
                 </button>
               )}
-            </div>*/}
+            </div>
           </div>
         </div>
       </div>
