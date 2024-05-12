@@ -285,4 +285,4 @@ const {data: recent} = useRecents(`/api/recentId/${recentId}`)
 
 export default Page;
 
-//created by Esan Samuel 
+/*created by Esan Samuel, software developer */
