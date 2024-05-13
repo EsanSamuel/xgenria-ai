@@ -98,12 +98,24 @@ const Document = () => {
         setFilterByTags("Science");
         modal.onClose();
         break;
-      case "English":
-        setFilterByTags("English");
-        modal.onClose();
-        break;
       case "Programming":
         setFilterByTags("Programming");
+        modal.onClose();
+        break;
+      case "General":
+        setFilterByTags("General");
+        modal.onClose();
+        break;
+      case "Education":
+        setFilterByTags("Education");
+        modal.onClose();
+        break;
+      case "Technology":
+        setFilterByTags("Technology");
+        modal.onClose();
+        break;
+      case "Business":
+        setFilterByTags("Business");
         modal.onClose();
         break;
       default:
@@ -249,16 +261,34 @@ const Document = () => {
                     Science
                   </button>
                   <button
-                    onClick={() => handleFilter("English")}
+                    onClick={() => handleFilter("Generate")}
                     className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
                   >
-                    English
+                    General 
                   </button>
                   <button
                     onClick={() => handleFilter("Programming")}
                     className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
                   >
                     Programming
+                  </button>
+<button
+                    onClick={() => handleFilter("Business")}
+                    className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
+                  >
+                    Business 
+                  </button>
+<button
+                    onClick={() => handleFilter("Technology")}
+                    className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
+                  >
+                    Technology 
+                  </button>
+<button
+                    onClick={() => handleFilter("Education")}
+                    className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
+                  >
+                    Education 
                   </button>
                   <button
                     onClick={() => {
