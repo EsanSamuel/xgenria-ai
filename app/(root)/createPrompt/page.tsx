@@ -263,9 +263,12 @@ const CreatePrompt = () => {
                   className="flex-grow border w-full border-blue-1 rounded-[10px] outline-none p-2 bg-dark-1 text-[13px]"
                 >
                   <option>Select Tag</option>
+                  <option>General</option>
                   <option>Science</option>
-                  <option>English</option>
+                  <option>Business</option>
+                  <option>Education</option>
                   <option>Programming</option>
+                  <option>Technology</option>
                 </select>
                 <button
                   className="px-4 py-2 bg-blue-1 rounded-full w-full hover:bg-opacity-50 text-[13px]"
