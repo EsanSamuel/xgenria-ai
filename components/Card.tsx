@@ -70,7 +70,7 @@ const Card = ({ document }: documentProps) => {
   }
 
   return (
-    <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 ">
+    <div className="flex  w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500">
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <FcFolder size={25} />
