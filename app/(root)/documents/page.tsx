@@ -169,7 +169,7 @@ const Document = () => {
       <div className="text-white md:p-5 p-3 py-10">
         <div className="flex justify-between items-center">
           <>
-            <h1 className="text-[22px]">
+            <h1 className="text-[22px] font-bold">
               {/*{getDay()} {user?.username},<br />
         here are your documents documents.*/}
               Documents
@@ -202,6 +202,7 @@ const Document = () => {
         <div className="mt-5 flex gap-2 items-center">
           <input
             className="flex-grow  w-full  rounded-[10px] outline-none p-3 bg-dark-1 text-[14px]"
+            type="search"
             placeholder="Search Documents..."
             onChange={(e) => setSearch(e.target.value)}
           />
