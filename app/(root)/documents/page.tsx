@@ -261,7 +261,7 @@ const Document = () => {
                     Science
                   </button>
                   <button
-                    onClick={() => handleFilter("Generate")}
+                    onClick={() => handleFilter("General")}
                     className="text-start hover:bg-blue-1 px-3 py-2 rounded text-[14px]"
                   >
                     General 
