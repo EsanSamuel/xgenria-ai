@@ -182,7 +182,7 @@ const CreatePrompt = () => {
                         alt="You"
                       />
                       <>
-                        <h1 className="text-[13px]">{input}</h1>
+                        <h1 className="text-[12px]">{input}</h1>
                       </>
                     </div>
                   ) : (
