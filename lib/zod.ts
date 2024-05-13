@@ -4,7 +4,7 @@ export const promtptProps = z.object({
   user_Id: z.string().min(1),
   title: z.string().min(1),
   promptData: z.string().min(1),
-  tag: z.enum(["Science", "English", "Programming"]),
+  tag: z.enum(["General", "Science", "Business", "Education", "Programming", "Technology"]),
 });
 
 export type promptType = z.infer<typeof promtptProps>;
