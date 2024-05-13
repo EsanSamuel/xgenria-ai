@@ -81,9 +81,12 @@ const Edit = () => {
               value={tag}
             >
               <option>Select Tag</option>
+              <option>General</option>
               <option>Science</option>
-              <option>English</option>
-              <option>Programming</option>
+              <option>Business</option>
+              <option>Education</option>
+                  <option>Programming</option>
+                  <option>Technology</option>
             </select>
           </label>
           <label className="flex gap-1 flex-col text-[14px]">
