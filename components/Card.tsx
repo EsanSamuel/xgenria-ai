@@ -84,7 +84,7 @@ const Card = ({ document }: documentProps) => {
         <div className="left-2 flex justify-between items-center">
           {LikeIcon()}
           <div className="flex gap-3 items-center">
-            <button className="bg-blue-1 px-4 py-2 text-white rounded-full text-[12px]">
+            <button className="bg-blue-1 px-4 py-1 text-white rounded-full text-[12px]">
               {document.tag}
             </button>
             <MdDeleteOutline size={20} onClick={handleDelete} />
