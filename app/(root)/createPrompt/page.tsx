@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import FadeLoader from "react-spinners/FadeLoader";
+import ClockLoader from "react-spinners/ClockLoader";
 import { Input } from "@/components/ui/input";
 import useSpeechRecognition from "@/hooks/useSpeechRecognition";
 import { FaMicrophoneSlash } from "react-icons/fa";
@@ -151,7 +152,7 @@ const CreatePrompt = () => {
           </div>
           {isLoading ? (
             <div className="text-center flex justify-center gap-3 items-center flex-col mt-[20%] w-full">
-              <FadeLoader
+              <ClockLoader
                 color="#0C78F9"
                 loading={isLoading}
                 cssOverride={override}
