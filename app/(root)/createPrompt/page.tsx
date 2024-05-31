@@ -202,6 +202,23 @@ const CreatePrompt = () => {
             </div>
           )}
           <div className="flex fixed flex-row bottom-3 gap-2 w-screen items-center md:max-w-screen-lg mx-auto p-0">
+            <div className="">
+              {isListening ? (
+                <button
+                  className="text-white bg-dark-2 rounded hover:bg-opacity-50"
+                  onClick={startRecording}
+                >
+                  <FaMicrophoneSlash size={20} />
+                </button>
+              ) : (
+                <button
+                  className="text-white bg-dark-2 rounded hover:bg-opacity-50"
+                  onClick={startRecording}
+                >
+                  <TiMicrophoneOutline size={20} />
+                </button>
+              )}
+            </div>
             <form
               onSubmit={handleSubmit}
               className="flex gap-2 md:max-w-screen-lg mx-auto w-full"
