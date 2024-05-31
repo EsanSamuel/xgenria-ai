@@ -19,6 +19,7 @@ import Image from "next/image";
 import { FaArrowUp } from "react-icons/fa6";
 import useRecents from "@/hooks/useRecent";
 import { PiGooglePodcastsLogoBold } from "react-icons/pi";
+import { FaMicrophone } from "react-icons/fa6";
 
 const Page = () => {
   return (
@@ -215,7 +216,7 @@ const CreatePrompt = () => {
                   className="text-white bg-dark-2 rounded hover:bg-opacity-50"
                   onClick={startRecording}
                 >
-                  <TiMicrophoneOutline size={25} />
+                  <FaMicrophone size={25} />
                 </button>
               )}
             </div>
