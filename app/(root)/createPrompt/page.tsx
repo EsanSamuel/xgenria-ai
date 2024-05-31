@@ -142,7 +142,7 @@ const CreatePrompt = () => {
             <div>
               {promptData && (
                 <button
-                  className="px-4 py-1 bg-blue-1 rounded-full text-[13px] font-bold"
+                  className="px-4 py-1 bg-blue-1 rounded-full text-[12px] font-bold"
                   onClick={openModal}
                 >
                   Save as Document
