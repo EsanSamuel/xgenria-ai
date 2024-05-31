@@ -30,11 +30,15 @@ const MobileNav = () => {
           <PiGooglePodcastsLogoBold className="text-[20px] font-bold text-blue-1 " />
           Xgenria ai.
         </h1>
+<div className="flex gap-3 items-center ">
+<Image src={user?.image!} className="w-[25px] h-[25px] rounded-full"
+alt="" width={100} height={100} />
         {showMenu ? (
           <IoClose size={20} onClick={() => setShowMenu(false)} />
         ) : (
           <BiMenuAltRight size={20} onClick={() => setShowMenu(true)} />
         )}
+</div>
       </div>
 
       {showMenu && (
