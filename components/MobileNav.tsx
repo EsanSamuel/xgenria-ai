@@ -31,8 +31,11 @@ const MobileNav = () => {
           Xgenria ai.
         </h1>
 <div className="flex gap-3 items-center ">
-<Image src={user?.image!} className="w-[25px] h-[25px] rounded-full"
-alt="" width={100} height={100} />
+{user.image ? ( <Image src={user?.image!} className="w-[25px] h-[25px] rounded-full"
+alt="" width={100} height={100} /> 
+  ) : (
+<div className="min-h-[25px] min-w-[25px] rounded-full border border-neutral-800"></div>
+)}
         {showMenu ? (
           <IoClose size={20} onClick={() => setShowMenu(false)} />
         ) : (
