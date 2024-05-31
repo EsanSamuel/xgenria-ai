@@ -208,14 +208,14 @@ const CreatePrompt = () => {
                   className="text-white bg-dark-2 rounded hover:bg-opacity-50"
                   onClick={startRecording}
                 >
-                  <FaMicrophoneSlash size={20} />
+                  <FaMicrophoneSlash size={25} />
                 </button>
               ) : (
                 <button
                   className="text-white bg-dark-2 rounded hover:bg-opacity-50"
                   onClick={startRecording}
                 >
-                  <TiMicrophoneOutline size={20} />
+                  <TiMicrophoneOutline size={25} />
                 </button>
               )}
             </div>
