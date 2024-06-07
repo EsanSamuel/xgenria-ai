@@ -264,11 +264,14 @@ const CreatePrompt = () => {
           <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
             <div className="flex justify-center items-center h-full sm:flex p-3">
               <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  md:p-10 p-5 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
-                <IoClose
+                <div className="flex justify-between items-center ">
+<h1 className="font-bold text-[16px]">Save</h1>
+<IoClose
                   size={20}
                   className="text-right"
                   onClick={closeModal}
                 />
+</div>
                 <h3 className="md:text-[15px] text-[13px]">
                   Are you sure you want to save prompt as a document?
                 </h3>
