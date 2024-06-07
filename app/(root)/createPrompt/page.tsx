@@ -265,7 +265,7 @@ const CreatePrompt = () => {
             <div className="flex justify-center items-center h-full sm:flex p-3">
               <div className="w-full lg:h-auto border-0 rounded-lg relative flex flex-col gap-6 h-auto  md:p-10 p-5 bg-dark-1  text-white shadow-lg outline-none focus:outline-none">
                 <div className="flex justify-between items-center ">
-<h1 className="font-bold text-[16px]">Save as document</h1>
+<h1 className="font-bold text-[16px]">Save as Document</h1>
 <IoClose
                   size={20}
                   className="text-right"
