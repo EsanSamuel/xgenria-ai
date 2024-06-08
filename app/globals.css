@@ -12,12 +12,12 @@
 
 *::-webkit-scrollbar {
   background: transparent;
-  width: 6px;
+  width: 4px;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: #aaaaaa;
-  width: 5px;
+  width: 4px;
   border-radius: 10px;
 }
 
