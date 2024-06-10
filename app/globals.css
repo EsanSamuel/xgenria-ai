@@ -21,6 +21,21 @@
   border-radius: 10px;
 }
 
+.bg-pattern:before {
+  content: "";
+  position: fixed; /* Use fixed positioning */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.03;
+  z-index: -2;
+  background-image: url("../public/noise.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; /* Center the background */
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
