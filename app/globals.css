@@ -30,7 +30,7 @@
   height: 100vh;
   opacity: 0.03;
   z-index: -2;
-  background-image: url("./public/noise.png");
+  background-image: url("../public/noise.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; /* Center the background */
