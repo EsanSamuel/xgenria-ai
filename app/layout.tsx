@@ -21,7 +21,7 @@ export default function RootLayout({
       <Toaster />
       <Provider>
         <PromptProvider>
-          <body className="md:flex gap-2 bg-dark-2 bg-custom-image bg-cover bg-center">
+          <body className="md:flex gap-2 bg-dark-2 bg-pattern bg-cover bg-center">
             <Sidebar />
             <SkeletonTheme>{children}</SkeletonTheme>
           </body>
