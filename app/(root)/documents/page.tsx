@@ -188,7 +188,7 @@ const Document = () => {
             <VscPinned size={20} />
             Pinned Documents
           </h1>
-          <ScrollArea className="md:w-[1200px] w-full whitespace-nowrap">
+          <ScrollArea className="md:w-[1000px] w-full whitespace-nowrap">
             <div className="flex gap-3 w-full">
               {pinned?.map((pin: PinnedProps) => (
                 <div className="" key={pin.id}>
